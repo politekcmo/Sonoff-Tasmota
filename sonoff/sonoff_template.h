@@ -281,7 +281,7 @@ const uint8_t kNiceList[MAXMODULE] PROGMEM = {
 
 // Default module settings
 const mytmplt kModules[MAXMODULE] PROGMEM = {
-  { "Sonoff Basic",    // Sonoff Basic (ESP8266)
+  { "Sonoff Basic",    // Sonoff Basic modified to work with etekcity plugs with different relay pins.  this needs to be changed to work as a separate template instead of the lazy change here :( )(ESP8266) 
      0,        // GPIO00 Button
      GPIO_USER,        // GPIO01 Serial RXD and Optional sensor
      0,                // GPIO02
