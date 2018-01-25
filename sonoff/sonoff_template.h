@@ -86,8 +86,7 @@ enum UserSelectablePins {
   GPIO_SAIR_RX,        // SenseAir Serial interface
   GPIO_SPI_CS,         // SPI Chip Select
   GPIO_SPI_DC,         // SPI Data Direction
-  GPIO_BACKLIGHT,      // Display backlight control
-  GPIO_PMS5003,        // Plantower PMS5003 Serial interface
+  GPIO_BACKLIGHT,
   GPIO_SENSOR_END };
 
 // Text in webpage Module Parameters and commands GPIOS and GPIO
@@ -156,8 +155,7 @@ const char kSensors[GPIO_SENSOR_END][9] PROGMEM = {
   D_SENSOR_SAIR_RX,
   D_SENSOR_SPI_CS,
   D_SENSOR_SPI_DC,
-  D_SENSOR_BACKLIGHT,
-  D_SENSOR_PMS5003
+  D_SENSOR_BACKLIGHT
 };
 
 // Programmer selectable GPIO functionality offset by user selectable GPIOs
@@ -284,11 +282,11 @@ const uint8_t kNiceList[MAXMODULE] PROGMEM = {
 // Default module settings
 const mytmplt kModules[MAXMODULE] PROGMEM = {
   { "Sonoff Basic",    // Sonoff Basic (ESP8266)
-     GPIO_KEY1,        // GPIO00 Button
+     0,        // GPIO00 Button
      GPIO_USER,        // GPIO01 Serial RXD and Optional sensor
      0,                // GPIO02
      GPIO_USER,        // GPIO03 Serial TXD and Optional sensor
-     GPIO_USER,        // GPIO04 Optional sensor
+     GPIO_REL1,        // GPIO04 Optional sensor
      0,                // GPIO05
      0,                // GPIO06 (SD_CLK   Flash)
      0,                // GPIO07 (SD_DATA0 Flash QIO/DIO/DOUT)
@@ -296,9 +294,9 @@ const mytmplt kModules[MAXMODULE] PROGMEM = {
      0,                // GPIO09 (SD_DATA2 Flash QIO)
      0,                // GPIO10 (SD_DATA3 Flash QIO)
      0,                // GPIO11 (SD_CMD   Flash)
-     GPIO_REL1,        // GPIO12 Red Led and Relay (0 = Off, 1 = On)
+     0,        // GPIO12 Red Led and Relay (0 = Off, 1 = On)
      GPIO_LED1_INV,    // GPIO13 Green Led (0 = On, 1 = Off)
-     GPIO_USER,        // GPIO14 Optional sensor
+     GPIO_KEY1,        // GPIO14 Optional sensor
      0,                // GPIO15
      0,                // GPIO16
      0                 // ADC0 Analog input
@@ -357,14 +355,22 @@ const mytmplt kModules[MAXMODULE] PROGMEM = {
      0, 0, 0
   },
   { "Sonoff Pow",      // Sonoff Pow (ESP8266)
-     GPIO_KEY1,        // GPIO00 Button
-     0, 0, 0, 0,
-     GPIO_HLW_SEL,     // GPIO05 HLW8012 Sel output
-     0, 0, 0, 0, 0, 0, // Flash connection
-     GPIO_REL1,        // GPIO12 Red Led and Relay (0 = Off, 1 = On)
+     0,        // GPIO00 Button
+     0, //01
+     0,
+     0,
+     GPIO_REL1, //gpio 04 relay
+     GPIO_LED1,     // GPIO05 HLW8012 Sel output
+     0, //06
+     0,
+     0, //08
+     0,
+     0,
+     0, // Flash connection
+     0,        // GPIO12 Red Led and Relay (0 = Off, 1 = On)
      GPIO_HLW_CF1,     // GPIO13 HLW8012 CF1 voltage / current
      GPIO_HLW_CF,      // GPIO14 HLW8012 CF power
-     GPIO_LED1,        // GPIO15 Green Led (0 = On, 1 = Off)
+     GPIO_KEY1,        // GPIO15 Green Led (0 = On, 1 = Off)
      0, 0
   },
   { "Sonoff 4CH",      // Sonoff 4CH (ESP8285)
@@ -501,7 +507,7 @@ const mytmplt kModules[MAXMODULE] PROGMEM = {
      GPIO_REL1,        // GPIO15 Relay (0 = Off, 1 = On)
      0, 0
   },
-  { "Generic",         // Any ESP8266/ESP8285 device like WeMos and NodeMCU hardware (ESP8266)
+  { "WeMos D1 mini",   // WeMos and NodeMCU hardware (ESP8266)
      GPIO_USER,        // GPIO00 D3 Wemos Button Shield
      GPIO_USER,        // GPIO01 TX Serial RXD
      GPIO_USER,        // GPIO02 D4 Wemos DHT Shield
@@ -860,44 +866,6 @@ const mytmplt kModules[MAXMODULE] PROGMEM = {
      GPIO_PWM3,        // GPIO14 RGB LED Blue
      0, 0, 0
   }
-
-  { "SMPW701E",        // SM-PW701E WLAN Socket (#1190)
-     0, 0, 0, 0,
-     GPIO_LED1_INV,    // GPIO04 Blue Led (0 = On, 1 = Off)
-     0,                // GPIO05 IR or RF receiver (optional)
-     0, 0, 0, 0, 0, 0, // Flash connection
-     GPIO_REL1,        // GPIO12 Relay and Red Led (0 = Off, 1 = On)
-     GPIO_KEY1,        // GPIO13 Button
-     0, 0, 0, 0
-  }
-
-  { "SWA1",            // Smart Plugs (ESP8266)
-     0,
-     GPIO_USER,        // GPIO01
-     0,
-     GPIO_USER,        // GPIO03
-     GPIO_LED1_INV,    // GPIO04 Blue LED
-     GPIO_REL1,        // GPIO05 Red LED and relay
-     0, 0, 0, 0, 0, 0, // Flash connection
-     0,
-     GPIO_KEY1,        // GPIO13 Button (normally GPIO00)
-     GPIO_USER,        // GPIO14
-     0, 0, 0
-  }
-
-  { "MagicHome v2.3",  // Magic Home (aka Flux-light) (ESP8266) (#1353)
-     0, 0,
-     GPIO_LED1_INV,    // GPIO02 Blue onboard LED
-     0,
-     GPIO_USER,        // GPIO04 IR receiver (optional)
-     GPIO_PWM2,        // GPIO05 RGB LED Green
-     0, 0, 0, 0, 0, 0, // Flash connection
-     GPIO_PWM1,        // GPIO12 RGB LED Red
-     GPIO_PWM3,        // GPIO13 RGB LED Blue
-     0,
-     GPIO_PWM4,        // GPIO15 RGBW LED White
-     0, 0
-  },
 
 */
 
